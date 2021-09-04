@@ -2,4 +2,8 @@
 h1{
     font-size: rem(24);
     font-weight: $weight-bold;
+
+    @include breakpoint-down(small){
+        font-size: rem(16);
+    }
 }

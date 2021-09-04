@@ -9,7 +9,7 @@
 
 .dark-mode {
   --clr-bg: var(--clr-dark-mode-bg);
-  --clr-header-bg: var(--clr-dark-mode-el);
+  --clr-elements: var(--clr-dark-mode-el);
   --clr-text: var(--clr-white);
 }
 
@@ -42,6 +42,11 @@ h1 {
   font-size: 1.5rem;
   font-weight: 800;
 }
+@media (max-width: 39.9375em) {
+  h1 {
+    font-size: 1rem;
+  }
+}
 
 body {
   max-width: 100%;
@@ -58,7 +63,27 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.875rem 4.375rem;
-  background-color: var(--clr-header-bg);
+  background-color: var(--clr-elements);
+}
+@media (max-width: 63.9375em) {
+  .header {
+    padding: 1.875rem;
+  }
+}
+@media (max-width: 39.9375em) {
+  .header {
+    padding: 1.25rem;
+  }
+}
+.header-theme-controller--button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.3125rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--clr-text);
 }
 
 /*# sourceMappingURL=/style.082fdd9f.css.map */

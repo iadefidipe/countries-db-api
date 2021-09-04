@@ -5,8 +5,29 @@
     justify-content: space-between;
     align-items: center;
     padding: rem(30) rem(70);
-    background-color: var(--clr-header-bg);
+    background-color: var(--clr-elements);
+    @include breakpoint-down(medium){
+        padding: rem(30);
+    }
+    @include breakpoint-down(small){
+        padding: rem(20);
+    }
 
 
+    &-theme-controller{
+        
+
+        &--button{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: rem(5);
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--clr-text);
+            // font-weight: $weight-medium;
+        }
+    }
 }
 
