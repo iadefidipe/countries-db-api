@@ -1,0 +1,31 @@
+
+.preference, .search-input{
+    display: flex;
+    align-items: center;
+}
+
+.preference{
+    justify-content: space-between;
+
+    .search-input{
+        padding: rem(10) 0 rem(10) rem(20);
+        background-color: var(--clr-dark-el);
+        border-radius: rem(5);
+        min-width: 30%;
+        gap: rem( 10);
+
+        &-field::placeholder{
+         color: var(--clr-text);
+        }
+    }
+
+    input{
+        background: none;
+        border: none;
+    }
+
+}
+
+    
+
+    

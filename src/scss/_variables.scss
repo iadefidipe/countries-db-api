@@ -9,22 +9,25 @@
 
     // color
     // dark-mode
-    --clr-dark-mode-bg: hsl(207, 26%, 17%);
-    --clr-dark-mode-el: hsl(209, 23%, 22%);
-    --clr-dark-mode-input: hsl(0, 0%, 52%);
+    --clr-dark-bg: hsl(207, 26%, 17%);
+    --clr-dark-el: hsl(209, 23%, 22%);
+    --clr-dark-input: hsl(0, 0%, 52%);
+    --clr-dark-shadow: hsla(0, 0%, 52%, 0);
 
     // light-mode
-    --clr-light-mode-text: hsl(200, 15%, 8%);
-    --clr-light-mode-bg: hsl(0, 0%, 98%);
+    --clr-light-text: hsl(200, 15%, 8%);
+    --clr-light-bg: hsl(0, 0%, 98%);
+    --clr-light-shadow: hsla(0, 0%, 52%, 0.446);
 
     --clr-white: hsl(0, 0%, 100%);
 
 }
 
 .dark-mode{
-    --clr-bg: var(--clr-dark-mode-bg);
-    --clr-elements: var(--clr-dark-mode-el);
+    --clr-bg: var(--clr-dark-bg);
+    --clr-elements: var(--clr-dark-el);
     --clr-text: var(--clr-white);
+    --clr-shadow: var(var(--clr-dark-shadow))
 }
 
 

@@ -3,12 +3,23 @@ body {
     min-height: 100vh;
     background-color: var(--clr-bg);
     color: var(--clr-text);
-    font-size: rem(14);
+    font-size: rem(16);
     font-family: $font-nunito-san;
     font-weight: $weight-light;
-  }
+    box-shadow: 0 4px 4px var(--clr-bg) ;
+
+}
 
 
-// .page-container{
-//     padding: 0 rem(40);
-// }
+.main-container{
+    
+    padding: rem(30) rem(70);
+    
+    @include breakpoint-down(medium){
+        padding: rem(30);
+    }
+    @include breakpoint-down(small){
+        padding: rem(20);
+    }
+
+}
