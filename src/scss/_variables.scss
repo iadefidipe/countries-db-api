@@ -4,17 +4,29 @@
     @return #{$remSize}rem;
 }
 
-// color
-// dark-mode
-$clr-dark-mode-bg: hsl(207, 26%, 17%);
-$clr-dark-mode-el: hsl(209, 23%, 22%);
-$clr-dark-mode-input: hsl(0, 0%, 52%);
 
-// light-mode
-$clr-light-mode-text: hsl(200, 15%, 8%);
-$clr-light-mode-bg: hsl(0, 0%, 98%);
+:root{
 
-$clr-white: hsl(0, 0%, 100%);
+    // color
+    // dark-mode
+    --clr-dark-mode-bg: hsl(207, 26%, 17%);
+    --clr-dark-mode-el: hsl(209, 23%, 22%);
+    --clr-dark-mode-input: hsl(0, 0%, 52%);
+
+    // light-mode
+    --clr-light-mode-text: hsl(200, 15%, 8%);
+    --clr-light-mode-bg: hsl(0, 0%, 98%);
+
+    --clr-white: hsl(0, 0%, 100%);
+
+}
+
+.dark-mode{
+    --clr-bg: var(--clr-dark-mode-bg);
+    --clr-header-bg: var(--clr-dark-mode-el);
+    --clr-text: var(--clr-white);
+}
+
 
 
 // font
