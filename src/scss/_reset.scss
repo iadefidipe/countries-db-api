@@ -23,3 +23,11 @@ li {
   color: inherit;
 }
 
+input, select{
+  background: none;
+  border: none;
+}
+
+input:focus, select:focus{
+  outline: none;
+}

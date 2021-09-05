@@ -41,6 +41,15 @@ li {
   color: inherit;
 }
 
+input, select {
+  background: none;
+  border: none;
+}
+
+input:focus, select:focus {
+  outline: none;
+}
+
 h1 {
   font-size: 1.5rem;
   font-weight: 800;
@@ -112,6 +121,13 @@ body {
 .preference {
   justify-content: space-between;
 }
+@media (max-width: 39.9375em) {
+  .preference {
+    flex-direction: column;
+    align-items: unset;
+    gap: 1.25rem;
+  }
+}
 .preference .search-input {
   padding: 0.625rem 0 0.625rem 1.25rem;
   background-color: var(--clr-dark-el);
@@ -122,9 +138,42 @@ body {
 .preference .search-input-field::placeholder {
   color: var(--clr-text);
 }
+@media (max-width: 39.9375em) {
+  .preference .search-input {
+    min-width: 100%;
+  }
+}
 .preference input {
-  background: none;
-  border: none;
+  width: 100%;
+}
+.preference .filter {
+  background-color: var(--clr-dark-el);
+  padding: 0.625rem;
+  border-radius: 0.3125rem;
+}
+@media (max-width: 39.9375em) {
+  .preference .filter {
+    width: 10rem;
+  }
+}
+.preference .filter-select {
+  color: var(--clr-text);
+}
+.preference .filter-select:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+.preference .filter-option {
+  background-color: red;
+}
+.preference .filter-option option {
+  background-color: red;
 }
 
 /*# sourceMappingURL=/style.082fdd9f.css.map */
