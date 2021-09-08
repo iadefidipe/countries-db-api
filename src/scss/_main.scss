@@ -1,85 +1,69 @@
-
-.preference, .search-input{
-    display: flex;
-    align-items: center;
+.preference,
+.search-input {
+  display: flex;
+  align-items: center;
 }
 
-.preference{
-    justify-content: space-between;
+.preference {
+  justify-content: space-between;
 
-    @include breakpoint-down (small){
-        flex-direction: column;
-        align-items: unset;
-        gap: rem(20);
+  @include breakpoint-down(small) {
+    flex-direction: column;
+    align-items: unset;
+    gap: rem(20);
+  }
+
+  .search-input {
+    padding: rem(10) 0 rem(10) rem(20);
+    background-color: var(--clr-dark-el);
+    border-radius: rem(5);
+    min-width: 30%;
+    gap: rem(10);
+
+    &-field::placeholder {
+      color: var(--clr-text);
     }
 
+    @include breakpoint-down(small) {
+      min-width: 100%;
+    }
+  }
 
-    .search-input{
-        padding: rem(10) 0 rem(10) rem(20);
-        background-color: var(--clr-dark-el);
-        border-radius: rem(5);
-        min-width: 30%;
-        gap: rem( 10);
+  input {
+    width: 100%;
+  }
 
-        &-field::placeholder{
-         color: var(--clr-text);
-        }
+  .filter {
+    position: relative;
+    width: rem(200);
 
-        @include breakpoint-down (small){
-           min-width: 100%;
-        }
+    & > * {
+      background-color: var(--clr-dark-el);
+      padding: rem(10);
+      border-radius: rem(5);
     }
 
-    input{
-        width: 100%;
+    &-select {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: rem(10);
     }
 
-    .filter{
-        background-color: var(--clr-dark-el);
-        padding: rem(10);
-        border-radius: rem(5);
+    &-options {
+      position: absolute;
+      top: rem(50);
+      left: 0;
+      right: 0;
 
+      p{
+          padding: rem(10);
+      }
 
-        @include breakpoint-down (small){
-            width: rem(160);
-         }
+      p:hover{
+        background-color: var(--clr-bg);
 
-        &-select{
-            color: var(--clr-text);
-
-            &:after{
-                position: absolute;
-                content: "";
-                top: 14px;
-                right: 10px;
-                width: 0;
-                height: 0;
-                border: 6px solid transparent;
-                border-color: #fff transparent transparent transparent;
-            }
-
-            
-        }
-
-        &-option{
-            background-color: red;
-
-            option{
-                background-color: red;
-                
-            }
-
-        }
-
-
-
-
+      }
     }
-
-
-
+  }
 }
-
-    
-
-    
