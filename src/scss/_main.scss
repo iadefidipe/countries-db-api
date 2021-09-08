@@ -1,5 +1,5 @@
 .preference,
-.search-input {
+.search-input, .btn-back{
   display: flex;
   align-items: center;
 }
@@ -65,5 +65,12 @@
 
       }
     }
+  }
+
+  .btn-back{
+    background-color: var(--clr-dark-el);
+    padding: rem(10) rem(30);
+    border-radius: rem(5);
+    gap: rem(20);
   }
 }
