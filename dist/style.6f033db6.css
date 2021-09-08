@@ -1,0 +1,235 @@
+:root {
+  --clr-dark-bg: hsl(207, 26%, 17%);
+  --clr-dark-el: hsl(209, 23%, 22%);
+  --clr-dark-input: hsl(0, 0%, 52%);
+  --clr-dark-shadow: hsla(0, 0%, 52%, 0);
+  --clr-light-text: hsl(200, 15%, 8%);
+  --clr-light-bg: hsl(0, 0%, 98%);
+  --clr-light-shadow: hsla(0, 0%, 52%, 0.446);
+  --clr-white: hsl(0, 0%, 100%);
+}
+
+.dark-mode {
+  --clr-bg: var(--clr-dark-bg);
+  --clr-elements: var(--clr-dark-el);
+  --clr-text: var(--clr-white);
+  --clr-shadow: var(var(--clr-dark-shadow))
+;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  min-height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+  color: inherit;
+}
+
+input, select {
+  background: none;
+  border: none;
+}
+
+input:focus, select:focus {
+  outline: none;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+@media (max-width: 39.9375em) {
+  h1 {
+    font-size: 1rem;
+  }
+}
+
+body {
+  max-width: 100%;
+  min-height: 100vh;
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  font-size: 1rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 300;
+  -webkit-box-shadow: 0 4px 4px var(--clr-bg);
+          box-shadow: 0 4px 4px var(--clr-bg);
+}
+
+.main-container {
+  padding: 1.875rem 4.375rem;
+}
+
+@media (max-width: 63.9375em) {
+  .main-container {
+    padding: 1.875rem;
+  }
+}
+
+@media (max-width: 39.9375em) {
+  .main-container {
+    padding: 1.25rem;
+  }
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1.875rem 4.375rem;
+  background-color: var(--clr-elements);
+}
+
+@media (max-width: 63.9375em) {
+  .header {
+    padding: 1.875rem;
+  }
+}
+
+@media (max-width: 39.9375em) {
+  .header {
+    padding: 1.25rem;
+  }
+}
+
+.header-theme-controller--button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.3125rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--clr-text);
+}
+
+.preference, .search-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.preference {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media (max-width: 39.9375em) {
+  .preference {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: unset;
+        -ms-flex-align: unset;
+            align-items: unset;
+    gap: 1.25rem;
+  }
+}
+
+.preference .search-input {
+  padding: 0.625rem 0 0.625rem 1.25rem;
+  background-color: var(--clr-dark-el);
+  border-radius: 0.3125rem;
+  min-width: 30%;
+  gap: 0.625rem;
+}
+
+.preference .search-input-field::-webkit-input-placeholder {
+  color: var(--clr-text);
+}
+
+.preference .search-input-field:-ms-input-placeholder {
+  color: var(--clr-text);
+}
+
+.preference .search-input-field::-ms-input-placeholder {
+  color: var(--clr-text);
+}
+
+.preference .search-input-field::placeholder {
+  color: var(--clr-text);
+}
+
+@media (max-width: 39.9375em) {
+  .preference .search-input {
+    min-width: 100%;
+  }
+}
+
+.preference input {
+  width: 100%;
+}
+
+.preference .filter {
+  background-color: var(--clr-dark-el);
+  padding: 0.625rem;
+  border-radius: 0.3125rem;
+}
+
+@media (max-width: 39.9375em) {
+  .preference .filter {
+    width: 10rem;
+  }
+}
+
+.preference .filter-select {
+  color: var(--clr-text);
+}
+
+.preference .filter-select:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+.preference .filter-option {
+  background-color: red;
+}
+
+.preference .filter-option option {
+  background-color: red;
+}
+
+
+/*# sourceMappingURL=/style.6f033db6.css.map */

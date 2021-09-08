@@ -1,0 +1,32 @@
+
+
+.card-container{
+
+    margin-top: rem(50);
+    display: flex;
+    gap: rem(40);
+    flex-wrap: wrap;
+
+    .country-card{
+        flex: 1;
+        min-width: rem(250);
+        background-color: var(--clr-elements);
+        border-radius:  rem(5);
+        transition: transform 500ms ease-in-out;
+
+        &:hover{
+            transform: translateY(-10px);
+        }
+    }
+
+    .country-image{
+        img{
+            border-radius:  rem(5) rem(5) 0 0;
+        }
+    }
+
+    .country-description{
+        padding: rem(30);
+    }
+
+}
