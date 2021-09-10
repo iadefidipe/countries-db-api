@@ -22,7 +22,9 @@
     "sass": "^1.38.0"
   },
   "dependencies": {
-    "core-js": "^3.16.2",
-    "regenerator": "^0.14.7"
+    "babel-polyfill": "^6.26.0",
+    "core-js": "^3.16.3",
+    "core.js": "^0.4.2",
+    "regenerator-runtime": "^0.13.9"
   }
 }

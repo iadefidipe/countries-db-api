@@ -77,29 +77,13 @@ h1, .country-name h2 {
 body {
   max-width: 100%;
   min-height: 100vh;
-  background-color: var(--clr-bg);
+  background-color: white;
   color: var(--clr-text);
   font-size: 1rem;
   font-family: "Nunito Sans", sans-serif;
   font-weight: 300;
   -webkit-box-shadow: 0 4px 4px var(--clr-bg);
           box-shadow: 0 4px 4px var(--clr-bg);
-}
-
-.main-container {
-  padding: 1.875rem 4.375rem;
-}
-
-@media (max-width: 63.9375em) {
-  .main-container {
-    padding: 1.875rem;
-  }
-}
-
-@media (max-width: 39.9375em) {
-  .main-container {
-    padding: 1.25rem;
-  }
 }
 
 .hidden {
