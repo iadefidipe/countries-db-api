@@ -63,8 +63,11 @@
             .borders{
                 display: flex;
 
+
                 &>*{
                     background-color: var(--clr-elements);
+    box-shadow: 0 0 4px var(--clr-shadow) ;
+
                     padding: rem(5);
                     border-radius: rem(5);
                 }

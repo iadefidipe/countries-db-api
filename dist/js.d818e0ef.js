@@ -123,13 +123,37 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 var filterSelect = document.querySelector('.filter-select');
 var filterOptions = document.querySelector('.filter-options');
 var themeController = document.querySelector('.theme-controller');
-var body = document.body;
+var body = document.body; //  Dropdown
+
 filterSelect.addEventListener('click', function () {
   filterOptions.classList.toggle('hidden');
-});
+}); //  theme controller
+
+var darkMode = localStorage.getItem('darkMode');
+
+var enableDarkmode = function enableDarkmode() {
+  body.classList.add('dark-mode');
+  body.classList.remove('light-mode');
+  document.querySelector('.theme-controller-text').innerHTML = 'Light mode';
+  localStorage.setItem('darkMode', 'enabled');
+};
+
+var disableDarkmode = function disableDarkmode() {
+  body.classList.remove('dark-mode');
+  body.classList.add('light-mode');
+  document.querySelector('.theme-controller-text').innerHTML = 'Dark mode';
+  localStorage.setItem('darkMode', null);
+};
+
+if (darkMode === 'enabled') enableDarkmode();
 themeController.addEventListener('click', function () {
-  body.classList.toggle('dark-mode');
-  body.classList.toggle('light-mode');
+  darkMode = localStorage.getItem("darkMode");
+
+  if (darkMode !== 'enabled') {
+    enableDarkmode();
+  } else {
+    disableDarkmode();
+  }
 });
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

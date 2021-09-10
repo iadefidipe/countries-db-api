@@ -6,6 +6,8 @@
     align-items: center;
     padding: rem(30) rem(70);
     background-color: var(--clr-elements);
+    box-shadow: 0 0 4px var(--clr-shadow) ;
+    
     @include breakpoint-down(medium){
         padding: rem(30);
     }

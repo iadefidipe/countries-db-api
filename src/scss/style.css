@@ -18,8 +18,7 @@
   --clr-bg: var(--clr-dark-bg);
   --clr-elements: var(--clr-dark-el);
   --clr-text: var(--clr-white);
-  --clr-shadow: var(var(--clr-dark-shadow))
-;
+  --clr-shadow: var(--clr-dark-shadow);
 }
 
 .light-mode {
@@ -119,6 +118,8 @@ body {
           align-items: center;
   padding: 1.875rem 4.375rem;
   background-color: var(--clr-elements);
+  -webkit-box-shadow: 0 0 4px var(--clr-shadow);
+          box-shadow: 0 0 4px var(--clr-shadow);
 }
 
 @media (max-width: 63.9375em) {
@@ -166,6 +167,11 @@ body {
           justify-content: space-between;
 }
 
+.preference > * {
+  -webkit-box-shadow: 0 0 4px var(--clr-shadow);
+          box-shadow: 0 0 4px var(--clr-shadow);
+}
+
 @media (max-width: 39.9375em) {
   .preference {
     -webkit-box-orient: vertical;
@@ -181,7 +187,7 @@ body {
 
 .preference .search-input {
   padding: 0.625rem 0 0.625rem 1.25rem;
-  background-color: var(--clr-dark-el);
+  background-color: var(--clr-elements);
   border-radius: 0.3125rem;
   min-width: 30%;
   gap: 0.625rem;
@@ -219,7 +225,7 @@ body {
 }
 
 .preference .filter > * {
-  background-color: var(--clr-dark-el);
+  background-color: var(--clr-elements);
   padding: 0.625rem;
   border-radius: 0.3125rem;
 }
@@ -253,7 +259,7 @@ body {
 }
 
 .preference .btn-back {
-  background-color: var(--clr-dark-el);
+  background-color: var(--clr-elements);
   padding: 0.625rem 1.875rem;
   border-radius: 0.3125rem;
   gap: 1.25rem;
@@ -280,6 +286,8 @@ body {
   transition: -webkit-transform 500ms ease-in-out;
   transition: transform 500ms ease-in-out;
   transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+  -webkit-box-shadow: 0 0 4px var(--clr-shadow);
+          box-shadow: 0 0 4px var(--clr-shadow);
 }
 
 .card-container .country-card:hover {
@@ -388,6 +396,8 @@ body {
 
 .contry-details-container .country-details .borders > * {
   background-color: var(--clr-elements);
+  -webkit-box-shadow: 0 0 4px var(--clr-shadow);
+          box-shadow: 0 0 4px var(--clr-shadow);
   padding: 0.3125rem;
   border-radius: 0.3125rem;
 }
