@@ -11,6 +11,8 @@
 
     @include breakpoint-down(small){
         flex-direction: column;
+        align-items: flex-start;
+
     }
 
     & > *{
@@ -31,6 +33,11 @@
         .properties{
             display: flex;
             justify-content: space-between;
+
+            @include breakpoint-down (small){
+                flex-direction: column;
+                gap: rem(20);
+            }
         }
 
         .country-props{
@@ -39,6 +46,19 @@
 
         .country-borders, .borders{
             gap: rem(10);
+            
+
+        }
+
+        .country-borders{
+            @include breakpoint-down (small){
+                flex-direction: column;
+                gap: rem(20);
+                align-items: flex-start;
+            }
+        }
+
+
 
             .borders{
                 display: flex;
@@ -49,7 +69,7 @@
                     border-radius: rem(5);
                 }
             }
-        }
+        
     }
     .country-details p > span, .country-borders p {
         font-weight: $weight-medium;

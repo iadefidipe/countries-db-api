@@ -30,6 +30,13 @@
     --clr-shadow: var(var(--clr-dark-shadow))
 }
 
+.light-mode{
+    --clr-bg: var(--clr-light-bg);
+    --clr-elements: var(--clr-dark-el);
+    --clr-text: var(--clr-light-text);
+    --clr-shadow: var( --clr-light-shadow);
+}
+
 
 
 // font
