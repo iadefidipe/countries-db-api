@@ -11,10 +11,11 @@ const body = document.body
 const cardContainer = document.querySelector('.card-container')
 const searchInput = document.querySelector('.search-input-field')
 const countryCard = document.querySelectorAll('.country-card')
+const regionFilter = document.querySelector('.filter-options')
 
 //  Dropdown
 filterSelect.addEventListener('click', () => {
-    filterOptions.classList.toggle('hidden')
+    regionFilter.classList.toggle('hidden')
 })
 
 //  theme controller
@@ -87,7 +88,7 @@ const countryData = async () => {
                     <div class="country-description">
                         <h2 class="country-name">${country.name}</h2>
                         <p> <span>Population:</span>${country.population}</p>
-                        <p> <span>Region:</span>${country.region}</p>
+                        <p class="country-region"> <span>Region:</span>${country.region}</p>
                         <p> <span>Capital:</span>${country.capital}d</p>
                     </div>       
             </a>
@@ -131,5 +132,35 @@ searchInput.addEventListener('input', (e) =>{
     
 })
 
+// region filter
+
+regionFilter.addEventListener('click', (e) =>{
+
+    const regions = document.querySelectorAll('.country-region')
+
+    regions.forEach(region => {
+        if( e.target.textContent === 'All'){
+           region.closest('.country-card').style.display = 'block';
+        console.log(region)
+           
+        }else{
+            if( e.target.textContent === region.textContent.split(':')[1]){
+                region.closest('.country-card').style.display = 'block';
+             }
+             else{
+                region.closest('.country-card').style.display = 'none';
+    
+             }
+
+        }
+
+
+
+
+        
+    })
+    regionFilter.classList.add('hidden')
+
+})
 
 

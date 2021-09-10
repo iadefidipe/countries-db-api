@@ -13150,10 +13150,11 @@ var themeController = document.querySelector('.theme-controller');
 var body = document.body;
 var cardContainer = document.querySelector('.card-container');
 var searchInput = document.querySelector('.search-input-field');
-var countryCard = document.querySelectorAll('.country-card'); //  Dropdown
+var countryCard = document.querySelectorAll('.country-card');
+var regionFilter = document.querySelector('.filter-options'); //  Dropdown
 
 filterSelect.addEventListener('click', function () {
-  filterOptions.classList.toggle('hidden');
+  regionFilter.classList.toggle('hidden');
 }); //  theme controller
 
 var darkMode = localStorage.getItem('darkMode');
@@ -13219,7 +13220,7 @@ var countryData = /*#__PURE__*/function () {
           case 9:
             data = _context.sent;
             markup = data.map(function (country) {
-              return "\n            <a href=\"".concat(country.alphaCode, "\" class=\"country-card\">               \n                    <div class=\"country-image\">\n                        <img src=\"").concat(country.flag, "\" alt=\"").concat(country.name, "-flag\">\n                    </div>\n                    <div class=\"country-description\">\n                        <h2 class=\"country-name\">").concat(country.name, "</h2>\n                        <p> <span>Population:</span>").concat(country.population, "</p>\n                        <p> <span>Region:</span>").concat(country.region, "</p>\n                        <p> <span>Capital:</span>").concat(country.capital, "d</p>\n                    </div>       \n            </a>\n            ");
+              return "\n            <a href=\"".concat(country.alphaCode, "\" class=\"country-card\">               \n                    <div class=\"country-image\">\n                        <img src=\"").concat(country.flag, "\" alt=\"").concat(country.name, "-flag\">\n                    </div>\n                    <div class=\"country-description\">\n                        <h2 class=\"country-name\">").concat(country.name, "</h2>\n                        <p> <span>Population:</span>").concat(country.population, "</p>\n                        <p class=\"country-region\"> <span>Region:</span>").concat(country.region, "</p>\n                        <p> <span>Capital:</span>").concat(country.capital, "d</p>\n                    </div>       \n            </a>\n            ");
             }).join('');
             cardContainer.innerHTML = "";
             cardContainer.insertAdjacentHTML('afterbegin', markup);
@@ -13257,6 +13258,23 @@ searchInput.addEventListener('input', function (e) {
       name.closest('.country-card').style.display = 'none';
     }
   });
+}); // region filter
+
+regionFilter.addEventListener('click', function (e) {
+  var regions = document.querySelectorAll('.country-region');
+  regions.forEach(function (region) {
+    if (e.target.textContent === 'All') {
+      region.closest('.country-card').style.display = 'block';
+      console.log(region);
+    } else {
+      if (e.target.textContent === region.textContent.split(':')[1]) {
+        region.closest('.country-card').style.display = 'block';
+      } else {
+        region.closest('.country-card').style.display = 'none';
+      }
+    }
+  });
+  regionFilter.classList.add('hidden');
 });
 },{"core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
