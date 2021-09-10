@@ -1,0 +1,22 @@
+.spinner-container {
+    display: grid;
+    place-items: center;
+    place-content: center;
+    height: rem(300);
+    width: 100%;
+    
+}
+.spinner {
+    &__spin {
+        text-align: center;
+        animation: loader 500ms ease-in-out infinite ;
+    }
+    i {
+        font-size: rem(100);
+    }
+}
+
+@keyframes loader {
+    0% {transform: rotateZ(0deg);}
+    100% {transform: rotateZ(360deg);}
+}
