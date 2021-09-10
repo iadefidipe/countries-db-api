@@ -23,6 +23,10 @@
 
 }
 
+.dark-mode, .light-mode{
+    transition: all 500ms ease-in-out;
+}
+
 .dark-mode{
     --clr-bg: var(--clr-dark-bg);
     --clr-elements: var(--clr-dark-el);
@@ -32,7 +36,7 @@
 
 .light-mode{
     --clr-bg: var(--clr-light-bg);
-    --clr-elements: var(--clr-dark-el);
+    --clr-elements: var(--clr-white);
     --clr-text: var(--clr-light-text);
     --clr-shadow: var( --clr-light-shadow);
 }
