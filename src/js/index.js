@@ -12,6 +12,7 @@ const cardContainer = document.querySelector('.card-container')
 const searchInput = document.querySelector('.search-input-field')
 const countryCard = document.querySelectorAll('.country-card')
 const regionFilter = document.querySelector('.filter-options')
+const btnBack = document.querySelector('.btn-back')
 
 //  Dropdown
 filterSelect.addEventListener('click', () => {
@@ -77,22 +78,27 @@ const countryData = async () => {
         
         if(!response.ok) throw new Error ('Could not fetch country data, Please refresh page')
         const data = await response.json()
+        
 
         
         const markup = data.map(country =>
-             `
-            <a href="${country.alphaCode}" class="country-card">               
-                    <div class="country-image">
-                        <img src="${country.flag}" alt="${country.name}-flag">
-                    </div>
-                    <div class="country-description">
-                        <h2 class="country-name">${country.name}</h2>
-                        <p> <span>Population:</span>${country.population}</p>
-                        <p class="country-region"> <span>Region:</span>${country.region}</p>
-                        <p> <span>Capital:</span>${country.capital}d</p>
-                    </div>       
-            </a>
-            `).join('')
+             {
+                
+                return `
+            <div class="country-card">
+                <a href="#${country.alpha3Code}" >
+                        <div class="country-image">
+                            <img src="${country.flag}" alt="${country.name}-flag">
+                        </div>
+                        <div class="country-description">
+                            <h2 class="country-name">${country.name}</h2>
+                            <p> <span>Population:</span>${country.population}</p>
+                            <p class="country-region"> <span>Region:</span>${country.region}</p>
+                            <p> <span>Capital:</span>${country.capital}d</p>
+                        </div>
+                </a>
+            </div>
+            `}).join('')
 
             cardContainer.innerHTML = "";
         cardContainer.insertAdjacentHTML('afterbegin', markup);
@@ -154,13 +160,109 @@ regionFilter.addEventListener('click', (e) =>{
 
         }
 
-
-
-
         
     })
     regionFilter.classList.add('hidden')
+    
+
 
 })
+
+// render country details
+// countryCard.forEach(country => country.addEventListener('click', () => {
+//     // const id = window.location.hash.slice(1);
+//     // console.log(id)
+//     console.log('hello')
+// }))
+
+const countryDetail = async () => {
+
+    try{
+        
+
+
+    
+
+       const id = window.location.hash.slice(1);
+       if (!id) return;
+       console.log(id)
+
+    
+    //    spinner(cardContainer);
+
+   
+       const response = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+
+   
+       if (!response.ok) throw new Error('Could not fetch country data, Please refresh page')
+       const data = await response.json();
+
+    
+       const [currency] = data.currencies;
+       const {code:currencyCode, name: currencyName, symbol: currencySymbol} = currency;
+
+       
+       const [language] = data.languages;
+       const {name: langName} = language;
+
+   
+       const markup = `
+       <div class="contry-details-container">
+
+          <div class="country-image">
+            <img src="${data.flag}" alt="${data.name}">
+          </div> 
+
+          <div class="country-details">
+            <div class="country-name">
+              <h2>${data.name}</h2>
+            </div>
+
+            <div class="properties">
+              <div class="country-props">
+                <p> <span>Native Name:</span> ${data.nativeName}</p>
+                <p> <span>Population:</span> ${data.population}</p>
+                <p> <span>Region:</span> ${data.region} </p>
+                <p> <span>Sub Region:</span> ${data.subregion} </p>
+                <p> <span>Capital:</span> ${data.capital} </p>
+              </div>
+              <div class="country-props">
+                <p> <span>Top Level Domain:</span>${data.topLevelDomain}</p>
+                <p> <span>Currencies:</span> ${currencyName} (${currencySymbol})</p>
+                <p> <span>Language:</span> ${langName}</p>
+              </div>
+            </div>
+
+            <div class="country-borders">
+              <p>Border Countries: </p>
+              <div class="borders">
+              ${data.borders.map(border => {
+                return `
+                <div class="boder"><a href="#${border}">${border}</a></div>
+                `
+              }).join('')}
+
+              </div>
+            </div>
+          </div> 
+
+
+        </div>
+       `
+
+  
+
+       cardContainer.innerHTML = "";
+       cardContainer.insertAdjacentHTML('afterbegin', markup);
+
+    }
+    catch(err){
+        alert(err)
+    }
+
+
+}
+
+window.addEventListener('hashchange',  countryDetail)
 
 
