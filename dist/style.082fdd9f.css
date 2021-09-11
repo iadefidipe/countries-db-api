@@ -198,6 +198,7 @@ body {
   padding: 0.625rem 1.875rem;
   border-radius: 0.3125rem;
   gap: 1.25rem;
+  display: none;
 }
 
 .card-container {

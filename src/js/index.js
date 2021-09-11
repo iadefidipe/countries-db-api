@@ -1,62 +1,60 @@
+"use strict";
 
-'use strict'
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-
-const filterSelect = document.querySelector('.filter-select')
-const filterOptions = document.querySelector('.filter-options')
-const themeController = document.querySelector('.theme-controller')
-const body = document.body
-const cardContainer = document.querySelector('.card-container')
-const searchInput = document.querySelector('.search-input-field')
-const countryCard = document.querySelectorAll('.country-card')
-const regionFilter = document.querySelector('.filter-options')
-const btnBack = document.querySelector('.btn-back')
+const filterSelect = document.querySelector(".filter-select");
+const filterOptions = document.querySelector(".filter-options");
+const themeController = document.querySelector(".theme-controller");
+const body = document.body;
+const cardContainer = document.querySelector(".card-container");
+const searchInput = document.querySelector(".search-input-field");
+const searchContainer = document.querySelector(".search-input");
+const filterContainer = document.querySelector(".filter");
+const countryCard = document.querySelectorAll(".country-card");
+const regionFilter = document.querySelector(".filter-options");
+const btnBack = document.querySelector(".btn-back");
+const preference = document.querySelector(".preference");
 
 //  Dropdown
-filterSelect.addEventListener('click', () => {
-    regionFilter.classList.toggle('hidden')
-})
+filterSelect.addEventListener("click", () => {
+  regionFilter.classList.toggle("hidden");
+});
 
 //  theme controller
-let darkMode = localStorage.getItem('darkMode');
+let darkMode = localStorage.getItem("darkMode");
 
 const enableDarkmode = () => {
-    body.classList.add('dark-mode')
-    body.classList.remove('light-mode')
-    document.querySelector('.theme-controller-text').innerHTML = 'Light mode'
+  body.classList.add("dark-mode");
+  body.classList.remove("light-mode");
+  document.querySelector(".theme-controller-text").innerHTML = "Light mode";
 
+  localStorage.setItem("darkMode", "enabled");
+};
 
-    localStorage.setItem('darkMode', 'enabled')
-}
+const disableDarkmode = () => {
+  body.classList.remove("dark-mode");
+  body.classList.add("light-mode");
+  document.querySelector(".theme-controller-text").innerHTML = "Dark mode";
 
-const disableDarkmode = () =>{
-    body.classList.remove('dark-mode')
-    body.classList.add('light-mode')
-    document.querySelector('.theme-controller-text').innerHTML = 'Dark mode'
+  localStorage.setItem("darkMode", null);
+};
 
-    localStorage.setItem('darkMode', null)
-}
+if (darkMode === "enabled") enableDarkmode();
 
-if (darkMode === 'enabled') enableDarkmode();
+themeController.addEventListener("click", () => {
+  darkMode = localStorage.getItem("darkMode");
 
-themeController.addEventListener('click', () => {
+  if (darkMode !== "enabled") {
+    enableDarkmode();
+  } else {
+    disableDarkmode();
+  }
+});
 
-    darkMode = localStorage.getItem("darkMode");
-    
-    if (darkMode !== 'enabled'){
-        enableDarkmode();
-        
-    }else{
-        disableDarkmode();
-    }
-    
-})
-
-//SPINNER 
+//SPINNER
 const spinner = (parentElement) => {
-    const markup = `
+  const markup = `
     <div class="spinner-container">
             <div class="spinner">
               <div class="spinner__spin">
@@ -64,27 +62,25 @@ const spinner = (parentElement) => {
               </div>
             </div>
           </div>
-    `
-    parentElement.innerHTML = "";
-    parentElement.insertAdjacentHTML('afterbegin', markup);
-}
+    `;
+  parentElement.innerHTML = "";
+  parentElement.insertAdjacentHTML("afterbegin", markup);
+};
 
-// rendering country data 
+// rendering country data
 const countryData = async () => {
-    try{
-        spinner(cardContainer)
+  try {
+    spinner(cardContainer);
 
-        const response = await fetch('https://restcountries.eu/rest/v2/all')
-        
-        if(!response.ok) throw new Error ('Could not fetch country data, Please refresh page')
-        const data = await response.json()
-        
+    const response = await fetch("https://restcountries.eu/rest/v2/all");
 
-        
-        const markup = data.map(country =>
-             {
-                
-                return `
+    if (!response.ok)
+      throw new Error("Could not fetch country data, Please refresh page");
+    const data = await response.json();
+
+    const markup = data
+      .map((country) => {
+        return `
             <div class="country-card">
                 <a href="#${country.alpha3Code}" >
                         <div class="country-image">
@@ -94,119 +90,95 @@ const countryData = async () => {
                             <h2 class="country-name">${country.name}</h2>
                             <p> <span>Population:</span>${country.population}</p>
                             <p class="country-region"> <span>Region:</span>${country.region}</p>
-                            <p> <span>Capital:</span>${country.capital}d</p>
+                            <p> <span>Capital:</span>${country.capital}</p>
                         </div>
                 </a>
             </div>
-            `}).join('')
+            `;
+      })
+      .join("");
 
-            cardContainer.innerHTML = "";
-        cardContainer.insertAdjacentHTML('afterbegin', markup);
+    cardContainer.innerHTML = "";
+    cardContainer.insertAdjacentHTML("afterbegin", markup);
 
-    return markup
+    return markup;
+  } catch (err) {
+    alert(err);
+  }
+};
 
-
-
-    }
-    catch(err){
-        alert(err)
-    }
-
-}
-
-countryData()
-
-
+countryData();
 
 // search input
-searchInput.addEventListener('input', (e) =>{
-    const {value} = e.target
+searchInput.addEventListener("input", (e) => {
+  const { value } = e.target;
 
-    // console.log(countryCard)
-    const countryName = document.querySelectorAll('.country-name')
-    // console.log(countryName)
+  // console.log(countryCard)
+  const countryName = document.querySelectorAll(".country-name");
+  // console.log(countryName)
 
-    countryName.forEach(name => {
-        if(name.textContent.toLowerCase().includes(value.toLowerCase())){
-           name.closest('.country-card').style.display = 'block';
-        }
-        else{
-           name.closest('.country-card').style.display = 'none';
-
-        }
-    })
-    
-})
+  countryName.forEach((name) => {
+    if (name.textContent.toLowerCase().includes(value.toLowerCase())) {
+      name.closest(".country-card").style.display = "block";
+    } else {
+      name.closest(".country-card").style.display = "none";
+    }
+  });
+});
 
 // region filter
 
-regionFilter.addEventListener('click', (e) =>{
+regionFilter.addEventListener("click", (e) => {
+  const regions = document.querySelectorAll(".country-region");
 
-    const regions = document.querySelectorAll('.country-region')
-
-    regions.forEach(region => {
-        if( e.target.textContent === 'All'){
-           region.closest('.country-card').style.display = 'block';
-        console.log(region)
-           
-        }else{
-            if( e.target.textContent === region.textContent.split(':')[1]){
-                region.closest('.country-card').style.display = 'block';
-             }
-             else{
-                region.closest('.country-card').style.display = 'none';
-    
-             }
-
-        }
-
-        
-    })
-    regionFilter.classList.add('hidden')
-    
-
-
-})
+  regions.forEach((region) => {
+    if (e.target.textContent === "All") {
+      region.closest(".country-card").style.display = "block";
+      console.log(region);
+    } else {
+      if (e.target.textContent === region.textContent.split(":")[1]) {
+        region.closest(".country-card").style.display = "block";
+      } else {
+        region.closest(".country-card").style.display = "none";
+      }
+    }
+  });
+  regionFilter.classList.add("hidden");
+});
 
 // render country details
-// countryCard.forEach(country => country.addEventListener('click', () => {
-//     // const id = window.location.hash.slice(1);
-//     // console.log(id)
-//     console.log('hello')
-// }))
 
 const countryDetail = async () => {
+  try {
+    searchContainer.style.display = "none";
+    filterContainer.style.display = "none";
+    btnBack.style.display = "flex";
 
-    try{
-        
+    // extract hash
+    const id = window.location.hash.slice(1);
+    if (!id) return;
 
+    spinner(cardContainer);
 
-    
+    const response = await fetch(
+      `https://restcountries.eu/rest/v2/alpha/${id}`
+    );
 
-       const id = window.location.hash.slice(1);
-       if (!id) return;
-       console.log(id)
+    if (!response.ok)
+      throw new Error("Could not fetch country data, Please refresh page");
+    const data = await response.json();
 
-    
-    //    spinner(cardContainer);
+    const [currency] = data.currencies;
+    const {
+      code: currencyCode,
+      name: currencyName,
+      symbol: currencySymbol,
+    } = currency;
 
-   
-       const response = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+    const [language] = data.languages;
+    const { name: langName } = language;
 
-   
-       if (!response.ok) throw new Error('Could not fetch country data, Please refresh page')
-       const data = await response.json();
-
-    
-       const [currency] = data.currencies;
-       const {code:currencyCode, name: currencyName, symbol: currencySymbol} = currency;
-
-       
-       const [language] = data.languages;
-       const {name: langName} = language;
-
-   
-       const markup = `
+    const markup = `
        <div class="contry-details-container">
 
           <div class="country-image">
@@ -236,11 +208,13 @@ const countryDetail = async () => {
             <div class="country-borders">
               <p>Border Countries: </p>
               <div class="borders">
-              ${data.borders.map(border => {
-                return `
+              ${data.borders
+                .map((border) => {
+                  return `
                 <div class="boder"><a href="#${border}">${border}</a></div>
-                `
-              }).join('')}
+                `;
+                })
+                .join("")}
 
               </div>
             </div>
@@ -248,21 +222,23 @@ const countryDetail = async () => {
 
 
         </div>
-       `
+       `;
 
-  
+    cardContainer.innerHTML = "";
+    cardContainer.insertAdjacentHTML("afterbegin", markup);
+  } catch (err) {
+    alert(err);
+  }
+};
 
-       cardContainer.innerHTML = "";
-       cardContainer.insertAdjacentHTML('afterbegin', markup);
+window.addEventListener("hashchange", countryDetail);
 
-    }
-    catch(err){
-        alert(err)
-    }
+// back button
+btnBack.addEventListener("click", () => {
+  searchContainer.style.display = "flex";
+  filterContainer.style.display = "block";
 
+  btnBack.style.display = "none";
 
-}
-
-window.addEventListener('hashchange',  countryDetail)
-
-
+  countryData();
+});
