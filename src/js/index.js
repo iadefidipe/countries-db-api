@@ -77,8 +77,10 @@ const countryData = async () => {
     if (!response.ok)
       throw new Error("Could not fetch country data, Please refresh page");
     const data = await response.json();
-
     console.log(data)
+
+
+
 
     const markup = data
       .map((country) => {
@@ -87,7 +89,7 @@ const countryData = async () => {
 
         return `
             <div class="country-card">
-                <a href="#${country.area}" >
+                <a href="#${country.cca2}" >
                         <div class="country-image">
                             <img src="${country.flags[0]}" alt="${name}-flag">
                         </div>
@@ -138,7 +140,7 @@ regionFilter.addEventListener("click", (e) => {
   regions.forEach((region) => {
     if (e.target.textContent === "All") {
       region.closest(".country-card").style.display = "block";
-      console.log(region);
+
     } else {
       if (e.target.textContent === region.textContent.split(":")[1]) {
         region.closest(".country-card").style.display = "block";
@@ -171,6 +173,7 @@ regionFilter.addEventListener("click", (e) => {
 //     if (!response.ok)
 //       throw new Error("Could not fetch country data, Please refresh page");
 //     const data = await response.json();
+//     console.log(data)
 
 //     const [currency] = data.currencies;
 //     const {
@@ -179,50 +182,50 @@ regionFilter.addEventListener("click", (e) => {
 //       symbol: currencySymbol,
 //     } = currency;
 
-//     const [language] = data.languages;
-//     const { name: langName } = language;
+    // const [language] = data.languages;
+    // const { name: langName } = language;
 
-//     const markup = `
-//        <div class="contry-details-container">
-//           <div class="country-image">
-//             <img src="${data.flag}" alt="${data.name}">
-//           </div> 
-//           <div class="country-details">
-//             <div class="country-name">
-//               <h2>${data.name}</h2>
-//             </div>
-//             <div class="properties">
-//               <div class="country-props">
-//                 <p> <span>Native Name:</span> ${data.nativeName}</p>
-//                 <p> <span>Population:</span> ${data.population}</p>
-//                 <p> <span>Region:</span> ${data.region} </p>
-//                 <p> <span>Sub Region:</span> ${data.subregion} </p>
-//                 <p> <span>Capital:</span> ${data.capital} </p>
-//               </div>
-//               <div class="country-props">
-//                 <p> <span>Top Level Domain:</span>${data.topLevelDomain}</p>
-//                 <p> <span>Currencies:</span> ${currencyName} (${currencySymbol})</p>
-//                 <p> <span>Language:</span> ${langName}</p>
-//               </div>
-//             </div>
-//             <div class="country-borders">
-//               <p>Border Countries: </p>
-//               <div class="borders">
-//               ${data.borders
-//                 .map((border) => {
-//                   return `
-//                 <div class="boder"><a href="#${border}">${border}</a></div>
-//                 `;
-//                 })
-//                 .join("")}
-//               </div>
-//             </div>
-//           </div> 
-//         </div>
-//        `;
+    // const markup = `
+    //    <div class="contry-details-container">
+    //       <div class="country-image">
+    //         <img src="${data.flag}" alt="${data.name}">
+    //       </div> 
+    //       <div class="country-details">
+    //         <div class="country-name">
+    //           <h2>${data.name}</h2>
+    //         </div>
+    //         <div class="properties">
+    //           <div class="country-props">
+    //             <p> <span>Native Name:</span> ${data.nativeName}</p>
+    //             <p> <span>Population:</span> ${data.population}</p>
+    //             <p> <span>Region:</span> ${data.region} </p>
+    //             <p> <span>Sub Region:</span> ${data.subregion} </p>
+    //             <p> <span>Capital:</span> ${data.capital} </p>
+    //           </div>
+    //           <div class="country-props">
+    //             <p> <span>Top Level Domain:</span>${data.topLevelDomain}</p>
+    //             <p> <span>Currencies:</span> ${currencyName} (${currencySymbol})</p>
+    //             <p> <span>Language:</span> ${langName}</p>
+    //           </div>
+    //         </div>
+    //         <div class="country-borders">
+    //           <p>Border Countries: </p>
+    //           <div class="borders">
+    //           ${data.borders
+    //             .map((border) => {
+    //               return `
+    //             <div class="boder"><a href="#${border}">${border}</a></div>
+    //             `;
+    //             })
+    //             .join("")}
+    //           </div>
+    //         </div>
+    //       </div> 
+    //     </div>
+    //    `;
 
-//     cardContainer.innerHTML = "";
-//     cardContainer.insertAdjacentHTML("afterbegin", markup);
+    // cardContainer.innerHTML = "";
+    // cardContainer.insertAdjacentHTML("afterbegin", markup);
 //   } catch (err) {
 //     alert(err);
 //   }

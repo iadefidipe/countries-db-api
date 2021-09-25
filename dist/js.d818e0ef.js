@@ -13226,7 +13226,7 @@ var countryData = /*#__PURE__*/function () {
             console.log(data);
             markup = data.map(function (country) {
               name = country.name.official;
-              return "\n            <div class=\"country-card\">\n                <a href=\"#".concat(country.area, "\" >\n                        <div class=\"country-image\">\n                            <img src=\"").concat(country.flags[0], "\" alt=\"").concat(name, "-flag\">\n                        </div>\n                        <div class=\"country-description\">\n                            <h2 class=\"country-name\">").concat(name, "</h2>\n                            <p class=\"country-region\"> <span>Region:</span>").concat(country.region, "</p>\n                            <p> <span>Capital:</span>").concat(country.capital, "</p>\n                        </div>\n                </a>\n            </div>\n            ");
+              return "\n            <div class=\"country-card\">\n                <a href=\"#".concat(country.cca2, "\" >\n                        <div class=\"country-image\">\n                            <img src=\"").concat(country.flags[0], "\" alt=\"").concat(name, "-flag\">\n                        </div>\n                        <div class=\"country-description\">\n                            <h2 class=\"country-name\">").concat(name, "</h2>\n                            <p class=\"country-region\"> <span>Region:</span>").concat(country.region, "</p>\n                            <p> <span>Capital:</span>").concat(country.capital, "</p>\n                        </div>\n                </a>\n            </div>\n            ");
             }).join("");
             cardContainer.innerHTML = "";
             cardContainer.insertAdjacentHTML("afterbegin", markup);
@@ -13271,7 +13271,6 @@ regionFilter.addEventListener("click", function (e) {
   regions.forEach(function (region) {
     if (e.target.textContent === "All") {
       region.closest(".country-card").style.display = "block";
-      console.log(region);
     } else {
       if (e.target.textContent === region.textContent.split(":")[1]) {
         region.closest(".country-card").style.display = "block";
@@ -13297,54 +13296,55 @@ regionFilter.addEventListener("click", function (e) {
 //     if (!response.ok)
 //       throw new Error("Could not fetch country data, Please refresh page");
 //     const data = await response.json();
+//     console.log(data)
 //     const [currency] = data.currencies;
 //     const {
 //       code: currencyCode,
 //       name: currencyName,
 //       symbol: currencySymbol,
 //     } = currency;
-//     const [language] = data.languages;
-//     const { name: langName } = language;
-//     const markup = `
-//        <div class="contry-details-container">
-//           <div class="country-image">
-//             <img src="${data.flag}" alt="${data.name}">
-//           </div> 
-//           <div class="country-details">
-//             <div class="country-name">
-//               <h2>${data.name}</h2>
-//             </div>
-//             <div class="properties">
-//               <div class="country-props">
-//                 <p> <span>Native Name:</span> ${data.nativeName}</p>
-//                 <p> <span>Population:</span> ${data.population}</p>
-//                 <p> <span>Region:</span> ${data.region} </p>
-//                 <p> <span>Sub Region:</span> ${data.subregion} </p>
-//                 <p> <span>Capital:</span> ${data.capital} </p>
-//               </div>
-//               <div class="country-props">
-//                 <p> <span>Top Level Domain:</span>${data.topLevelDomain}</p>
-//                 <p> <span>Currencies:</span> ${currencyName} (${currencySymbol})</p>
-//                 <p> <span>Language:</span> ${langName}</p>
-//               </div>
-//             </div>
-//             <div class="country-borders">
-//               <p>Border Countries: </p>
-//               <div class="borders">
-//               ${data.borders
-//                 .map((border) => {
-//                   return `
-//                 <div class="boder"><a href="#${border}">${border}</a></div>
-//                 `;
-//                 })
-//                 .join("")}
-//               </div>
-//             </div>
-//           </div> 
+// const [language] = data.languages;
+// const { name: langName } = language;
+// const markup = `
+//    <div class="contry-details-container">
+//       <div class="country-image">
+//         <img src="${data.flag}" alt="${data.name}">
+//       </div> 
+//       <div class="country-details">
+//         <div class="country-name">
+//           <h2>${data.name}</h2>
 //         </div>
-//        `;
-//     cardContainer.innerHTML = "";
-//     cardContainer.insertAdjacentHTML("afterbegin", markup);
+//         <div class="properties">
+//           <div class="country-props">
+//             <p> <span>Native Name:</span> ${data.nativeName}</p>
+//             <p> <span>Population:</span> ${data.population}</p>
+//             <p> <span>Region:</span> ${data.region} </p>
+//             <p> <span>Sub Region:</span> ${data.subregion} </p>
+//             <p> <span>Capital:</span> ${data.capital} </p>
+//           </div>
+//           <div class="country-props">
+//             <p> <span>Top Level Domain:</span>${data.topLevelDomain}</p>
+//             <p> <span>Currencies:</span> ${currencyName} (${currencySymbol})</p>
+//             <p> <span>Language:</span> ${langName}</p>
+//           </div>
+//         </div>
+//         <div class="country-borders">
+//           <p>Border Countries: </p>
+//           <div class="borders">
+//           ${data.borders
+//             .map((border) => {
+//               return `
+//             <div class="boder"><a href="#${border}">${border}</a></div>
+//             `;
+//             })
+//             .join("")}
+//           </div>
+//         </div>
+//       </div> 
+//     </div>
+//    `;
+// cardContainer.innerHTML = "";
+// cardContainer.insertAdjacentHTML("afterbegin", markup);
 //   } catch (err) {
 //     alert(err);
 //   }
