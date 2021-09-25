@@ -13140,18 +13140,6 @@ require("core-js/stable");
 
 require("regenerator-runtime/runtime");
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -13217,7 +13205,7 @@ var countryData = /*#__PURE__*/function () {
             _context.prev = 0;
             spinner(cardContainer);
             _context.next = 4;
-            return fetch("https://restcountries.eu/rest/v2/all");
+            return fetch("https://restcountries.com/v3/all");
 
           case 4:
             response = _context.sent;
@@ -13235,24 +13223,26 @@ var countryData = /*#__PURE__*/function () {
 
           case 9:
             data = _context.sent;
+            console.log(data);
             markup = data.map(function (country) {
-              return "\n            <div class=\"country-card\">\n                <a href=\"#".concat(country.alpha3Code, "\" >\n                        <div class=\"country-image\">\n                            <img src=\"").concat(country.flag, "\" alt=\"").concat(country.name, "-flag\">\n                        </div>\n                        <div class=\"country-description\">\n                            <h2 class=\"country-name\">").concat(country.name, "</h2>\n                            <p> <span>Population:</span>").concat(country.population, "</p>\n                            <p class=\"country-region\"> <span>Region:</span>").concat(country.region, "</p>\n                            <p> <span>Capital:</span>").concat(country.capital, "</p>\n                        </div>\n                </a>\n            </div>\n            ");
+              name = country.name.official;
+              return "\n            <div class=\"country-card\">\n                <a href=\"#".concat(country.area, "\" >\n                        <div class=\"country-image\">\n                            <img src=\"").concat(country.flags[0], "\" alt=\"").concat(name, "-flag\">\n                        </div>\n                        <div class=\"country-description\">\n                            <h2 class=\"country-name\">").concat(name, "</h2>\n                            <p class=\"country-region\"> <span>Region:</span>").concat(country.region, "</p>\n                            <p> <span>Capital:</span>").concat(country.capital, "</p>\n                        </div>\n                </a>\n            </div>\n            ");
             }).join("");
             cardContainer.innerHTML = "";
             cardContainer.insertAdjacentHTML("afterbegin", markup);
             return _context.abrupt("return", markup);
 
-          case 16:
-            _context.prev = 16;
+          case 17:
+            _context.prev = 17;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
 
-          case 19:
+          case 20:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 16]]);
+    }, _callee, null, [[0, 17]]);
   }));
 
   return function countryData() {
@@ -13292,88 +13282,81 @@ regionFilter.addEventListener("click", function (e) {
   });
   regionFilter.classList.add("hidden");
 }); // render country details
-
-var countryDetail = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var id, response, data, _data$currencies, currency, currencyCode, currencyName, currencySymbol, _data$languages, language, langName, markup;
-
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.prev = 0;
-            searchContainer.style.display = "none";
-            filterContainer.style.display = "none";
-            btnBack.style.display = "flex"; // extract hash
-
-            id = window.location.hash.slice(1);
-
-            if (id) {
-              _context2.next = 7;
-              break;
-            }
-
-            return _context2.abrupt("return");
-
-          case 7:
-            spinner(cardContainer);
-            _context2.next = 10;
-            return fetch("https://restcountries.eu/rest/v2/alpha/".concat(id));
-
-          case 10:
-            response = _context2.sent;
-
-            if (response.ok) {
-              _context2.next = 13;
-              break;
-            }
-
-            throw new Error("Could not fetch country data, Please refresh page");
-
-          case 13:
-            _context2.next = 15;
-            return response.json();
-
-          case 15:
-            data = _context2.sent;
-            _data$currencies = _slicedToArray(data.currencies, 1), currency = _data$currencies[0];
-            currencyCode = currency.code, currencyName = currency.name, currencySymbol = currency.symbol;
-            _data$languages = _slicedToArray(data.languages, 1), language = _data$languages[0];
-            langName = language.name;
-            markup = "\n       <div class=\"contry-details-container\">\n\n          <div class=\"country-image\">\n            <img src=\"".concat(data.flag, "\" alt=\"").concat(data.name, "\">\n          </div> \n\n          <div class=\"country-details\">\n            <div class=\"country-name\">\n              <h2>").concat(data.name, "</h2>\n            </div>\n\n            <div class=\"properties\">\n              <div class=\"country-props\">\n                <p> <span>Native Name:</span> ").concat(data.nativeName, "</p>\n                <p> <span>Population:</span> ").concat(data.population, "</p>\n                <p> <span>Region:</span> ").concat(data.region, " </p>\n                <p> <span>Sub Region:</span> ").concat(data.subregion, " </p>\n                <p> <span>Capital:</span> ").concat(data.capital, " </p>\n              </div>\n              <div class=\"country-props\">\n                <p> <span>Top Level Domain:</span>").concat(data.topLevelDomain, "</p>\n                <p> <span>Currencies:</span> ").concat(currencyName, " (").concat(currencySymbol, ")</p>\n                <p> <span>Language:</span> ").concat(langName, "</p>\n              </div>\n            </div>\n\n            <div class=\"country-borders\">\n              <p>Border Countries: </p>\n              <div class=\"borders\">\n              ").concat(data.borders.map(function (border) {
-              return "\n                <div class=\"boder\"><a href=\"#".concat(border, "\">").concat(border, "</a></div>\n                ");
-            }).join(""), "\n\n              </div>\n            </div>\n          </div> \n\n\n        </div>\n       ");
-            cardContainer.innerHTML = "";
-            cardContainer.insertAdjacentHTML("afterbegin", markup);
-            _context2.next = 28;
-            break;
-
-          case 25:
-            _context2.prev = 25;
-            _context2.t0 = _context2["catch"](0);
-            alert(_context2.t0);
-
-          case 28:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, null, [[0, 25]]);
-  }));
-
-  return function countryDetail() {
-    return _ref2.apply(this, arguments);
-  };
-}();
-
-window.addEventListener("hashchange", countryDetail); // back button
-
-btnBack.addEventListener("click", function () {
-  searchContainer.style.display = "flex";
-  filterContainer.style.display = "block";
-  btnBack.style.display = "none";
-  countryData();
-});
+// const countryDetail = async () => {
+//   try {
+//     searchContainer.style.display = "none";
+//     filterContainer.style.display = "none";
+//     btnBack.style.display = "flex";
+//     // extract hash
+//     const id = window.location.hash.slice(1);
+//     if (!id) return;
+//     spinner(cardContainer);
+//     const response = await fetch(
+//       `https://restcountries.com/v3/alpha/${id}`
+//     );
+//     if (!response.ok)
+//       throw new Error("Could not fetch country data, Please refresh page");
+//     const data = await response.json();
+//     const [currency] = data.currencies;
+//     const {
+//       code: currencyCode,
+//       name: currencyName,
+//       symbol: currencySymbol,
+//     } = currency;
+//     const [language] = data.languages;
+//     const { name: langName } = language;
+//     const markup = `
+//        <div class="contry-details-container">
+//           <div class="country-image">
+//             <img src="${data.flag}" alt="${data.name}">
+//           </div> 
+//           <div class="country-details">
+//             <div class="country-name">
+//               <h2>${data.name}</h2>
+//             </div>
+//             <div class="properties">
+//               <div class="country-props">
+//                 <p> <span>Native Name:</span> ${data.nativeName}</p>
+//                 <p> <span>Population:</span> ${data.population}</p>
+//                 <p> <span>Region:</span> ${data.region} </p>
+//                 <p> <span>Sub Region:</span> ${data.subregion} </p>
+//                 <p> <span>Capital:</span> ${data.capital} </p>
+//               </div>
+//               <div class="country-props">
+//                 <p> <span>Top Level Domain:</span>${data.topLevelDomain}</p>
+//                 <p> <span>Currencies:</span> ${currencyName} (${currencySymbol})</p>
+//                 <p> <span>Language:</span> ${langName}</p>
+//               </div>
+//             </div>
+//             <div class="country-borders">
+//               <p>Border Countries: </p>
+//               <div class="borders">
+//               ${data.borders
+//                 .map((border) => {
+//                   return `
+//                 <div class="boder"><a href="#${border}">${border}</a></div>
+//                 `;
+//                 })
+//                 .join("")}
+//               </div>
+//             </div>
+//           </div> 
+//         </div>
+//        `;
+//     cardContainer.innerHTML = "";
+//     cardContainer.insertAdjacentHTML("afterbegin", markup);
+//   } catch (err) {
+//     alert(err);
+//   }
+// };
+// window.addEventListener("hashchange", countryDetail);
+// // back button
+// btnBack.addEventListener("click", () => {
+//   searchContainer.style.display = "flex";
+//   filterContainer.style.display = "block";
+//   btnBack.style.display = "none";
+//   countryData();
+// });
 },{"core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -13402,7 +13385,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60028" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54996" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

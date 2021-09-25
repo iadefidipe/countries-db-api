@@ -72,23 +72,27 @@ const countryData = async () => {
   try {
     spinner(cardContainer);
 
-    const response = await fetch("https://restcountries.eu/rest/v2/all");
+    const response = await fetch("https://restcountries.com/v3/all");
 
     if (!response.ok)
       throw new Error("Could not fetch country data, Please refresh page");
     const data = await response.json();
 
+    console.log(data)
+
     const markup = data
       .map((country) => {
+
+          ({official: name} = country.name)
+
         return `
             <div class="country-card">
-                <a href="#${country.alpha3Code}" >
+                <a href="#${country.area}" >
                         <div class="country-image">
-                            <img src="${country.flag}" alt="${country.name}-flag">
+                            <img src="${country.flags[0]}" alt="${name}-flag">
                         </div>
                         <div class="country-description">
-                            <h2 class="country-name">${country.name}</h2>
-                            <p> <span>Population:</span>${country.population}</p>
+                            <h2 class="country-name">${name}</h2>
                             <p class="country-region"> <span>Region:</span>${country.region}</p>
                             <p> <span>Capital:</span>${country.capital}</p>
                         </div>
@@ -148,97 +152,90 @@ regionFilter.addEventListener("click", (e) => {
 
 // render country details
 
-const countryDetail = async () => {
-  try {
-    searchContainer.style.display = "none";
-    filterContainer.style.display = "none";
-    btnBack.style.display = "flex";
+// const countryDetail = async () => {
+//   try {
+//     searchContainer.style.display = "none";
+//     filterContainer.style.display = "none";
+//     btnBack.style.display = "flex";
 
-    // extract hash
-    const id = window.location.hash.slice(1);
-    if (!id) return;
+//     // extract hash
+//     const id = window.location.hash.slice(1);
+//     if (!id) return;
 
-    spinner(cardContainer);
+//     spinner(cardContainer);
 
-    const response = await fetch(
-      `https://restcountries.eu/rest/v2/alpha/${id}`
-    );
+//     const response = await fetch(
+//       `https://restcountries.com/v3/alpha/${id}`
+//     );
 
-    if (!response.ok)
-      throw new Error("Could not fetch country data, Please refresh page");
-    const data = await response.json();
+//     if (!response.ok)
+//       throw new Error("Could not fetch country data, Please refresh page");
+//     const data = await response.json();
 
-    const [currency] = data.currencies;
-    const {
-      code: currencyCode,
-      name: currencyName,
-      symbol: currencySymbol,
-    } = currency;
+//     const [currency] = data.currencies;
+//     const {
+//       code: currencyCode,
+//       name: currencyName,
+//       symbol: currencySymbol,
+//     } = currency;
 
-    const [language] = data.languages;
-    const { name: langName } = language;
+//     const [language] = data.languages;
+//     const { name: langName } = language;
 
-    const markup = `
-       <div class="contry-details-container">
+//     const markup = `
+//        <div class="contry-details-container">
+//           <div class="country-image">
+//             <img src="${data.flag}" alt="${data.name}">
+//           </div> 
+//           <div class="country-details">
+//             <div class="country-name">
+//               <h2>${data.name}</h2>
+//             </div>
+//             <div class="properties">
+//               <div class="country-props">
+//                 <p> <span>Native Name:</span> ${data.nativeName}</p>
+//                 <p> <span>Population:</span> ${data.population}</p>
+//                 <p> <span>Region:</span> ${data.region} </p>
+//                 <p> <span>Sub Region:</span> ${data.subregion} </p>
+//                 <p> <span>Capital:</span> ${data.capital} </p>
+//               </div>
+//               <div class="country-props">
+//                 <p> <span>Top Level Domain:</span>${data.topLevelDomain}</p>
+//                 <p> <span>Currencies:</span> ${currencyName} (${currencySymbol})</p>
+//                 <p> <span>Language:</span> ${langName}</p>
+//               </div>
+//             </div>
+//             <div class="country-borders">
+//               <p>Border Countries: </p>
+//               <div class="borders">
+//               ${data.borders
+//                 .map((border) => {
+//                   return `
+//                 <div class="boder"><a href="#${border}">${border}</a></div>
+//                 `;
+//                 })
+//                 .join("")}
+//               </div>
+//             </div>
+//           </div> 
+//         </div>
+//        `;
 
-          <div class="country-image">
-            <img src="${data.flag}" alt="${data.name}">
-          </div> 
+//     cardContainer.innerHTML = "";
+//     cardContainer.insertAdjacentHTML("afterbegin", markup);
+//   } catch (err) {
+//     alert(err);
+//   }
+// };
 
-          <div class="country-details">
-            <div class="country-name">
-              <h2>${data.name}</h2>
-            </div>
+// window.addEventListener("hashchange", countryDetail);
 
-            <div class="properties">
-              <div class="country-props">
-                <p> <span>Native Name:</span> ${data.nativeName}</p>
-                <p> <span>Population:</span> ${data.population}</p>
-                <p> <span>Region:</span> ${data.region} </p>
-                <p> <span>Sub Region:</span> ${data.subregion} </p>
-                <p> <span>Capital:</span> ${data.capital} </p>
-              </div>
-              <div class="country-props">
-                <p> <span>Top Level Domain:</span>${data.topLevelDomain}</p>
-                <p> <span>Currencies:</span> ${currencyName} (${currencySymbol})</p>
-                <p> <span>Language:</span> ${langName}</p>
-              </div>
-            </div>
+// // back button
+// btnBack.addEventListener("click", () => {
+//   searchContainer.style.display = "flex";
+//   filterContainer.style.display = "block";
 
-            <div class="country-borders">
-              <p>Border Countries: </p>
-              <div class="borders">
-              ${data.borders
-                .map((border) => {
-                  return `
-                <div class="boder"><a href="#${border}">${border}</a></div>
-                `;
-                })
-                .join("")}
+//   btnBack.style.display = "none";
 
-              </div>
-            </div>
-          </div> 
-
-
-        </div>
-       `;
-
-    cardContainer.innerHTML = "";
-    cardContainer.insertAdjacentHTML("afterbegin", markup);
-  } catch (err) {
-    alert(err);
-  }
-};
-
-window.addEventListener("hashchange", countryDetail);
-
-// back button
-btnBack.addEventListener("click", () => {
-  searchContainer.style.display = "flex";
-  filterContainer.style.display = "block";
-
-  btnBack.style.display = "none";
-
-  countryData();
-});
+//   countryData();
+// });
